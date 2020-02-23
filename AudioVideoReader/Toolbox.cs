@@ -26,7 +26,31 @@ namespace Toolbox {
             if(isBigEndian)
                 Array.Reverse(bData);
             uint data = BitConverter.ToUInt32(bData, 0);
-            index += 2;
+            index += 4;
+            Console.WriteLine("Index " + index + ": " + data);
+            return data;
+        }
+        public static uint BytesToSUInt(byte[] vs, ref int index, bool isBigEndian = false) {
+            byte[] bData = new byte[4];
+            Array.Copy(vs, index, bData, 0, 4);
+            for(int i = 0; i < 4; i++)
+                bData[i] &= 0x7F;
+            if(isBigEndian)
+                Array.Reverse(bData);
+            uint data = BitConverter.ToUInt32(bData, 0);
+            index += 4;
+            Console.WriteLine("Index " + index + ": " + data);
+            return data;
+        }
+        public static ulong BytesToSULong35(byte[] vs, ref int index, bool isBigEndian = false) {
+            byte[] bData = new byte[8];
+            Array.Copy(vs, index, bData, 0, 5);
+            for(int i = 0; i < 4; i++)
+                bData[i] &= 0x7F;
+            if(isBigEndian)
+                Array.Reverse(bData);
+            ulong data = BitConverter.ToUInt64(bData, 0);
+            index += 4;
             Console.WriteLine("Index " + index + ": " + data);
             return data;
         }
@@ -35,7 +59,9 @@ namespace Toolbox {
             Array.Copy(vs, index, bData, 0, length);
             BitArray bits = new BitArray(bData);
             index += length;
-            Console.WriteLine(bits.ToString());
+            Console.Write("Index " + index + ": ");
+            foreach(bool bit in bits) Console.Write(bit?"1":"0");
+            Console.WriteLine();
             return bits;
         }
     }
