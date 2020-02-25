@@ -6,7 +6,7 @@ using AudioReader;
 namespace AudioVideoReader {
     class Program {
         static void Main(string[] args) {
-            AudioFile audioFile = new MP3().Read("C:\\Users\\DEV0002\\Music\\Chill\\Cara Mia Addio");
+            AudioFile audioFile = new MP3().Read("C:\\Users\\DEV0002\\Music\\Chill\\I Can't Decide");
             SoundPlayer player = new SoundPlayer(AFR.ConvertToWav(audioFile));
             player.Load();
             long time = ((long)(audioFile.audioSize 
